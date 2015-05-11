@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FundooProgressDialog">
+        <attr name="centerStartX" format="integer"/>
+        <attr name="centerStartY" format="integer"/>
+        <attr name="centerEndX" format="integer"/>
+        <attr name="offSetX" format="integer"/>
+    </declare-styleable>
+</resources>
