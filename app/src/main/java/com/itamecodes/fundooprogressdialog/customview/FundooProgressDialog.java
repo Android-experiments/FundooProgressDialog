@@ -27,7 +27,7 @@ import java.util.List;
  */
 public class FundooProgressDialog extends View {
 
-    private Paint mPaint, mArrowPaint,mElasticWavePaint;
+    private Paint mPaint, mArrowPaint,mElasticWavePaint,mCirclePlaceHolderPaint;
     private List<Point> mPathPoints = new ArrayList<Point>();
     private List<Point> mArrowPoints = new ArrayList<Point>();
     private Point mTargetPoint;
@@ -108,16 +108,21 @@ public class FundooProgressDialog extends View {
         mRecty=(endX-startX)/2;
         mRecty1=startY+(mRecty);
        mCricleRect = new RectF(mRectX, mRecty, mRectx1, mRecty1);
+        mCirclePlaceHolderPaint = new Paint();
+        mCirclePlaceHolderPaint.setStyle(Paint.Style.STROKE);
+        mCirclePlaceHolderPaint.setColor(getResources().getColor(R.color.lightblue));
+        mCirclePlaceHolderPaint.setStrokeWidth(20);
+        mCirclePlaceHolderPaint.setAntiAlias(true);
         mPaint = new Paint();
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(Color.RED);
-        mPaint.setStrokeWidth(4);
+        mPaint.setColor(Color.WHITE);
+        mPaint.setStrokeWidth(10);
         mPaint.setAntiAlias(true);
 
         mElasticWavePaint = new Paint();
         mElasticWavePaint.setStyle(Paint.Style.STROKE);
-        mElasticWavePaint.setColor(Color.RED);
-        mElasticWavePaint.setStrokeWidth(4);
+        mElasticWavePaint.setColor(Color.WHITE);
+        mElasticWavePaint.setStrokeWidth(10);
         mElasticWavePaint.setDither(true);
         mElasticWavePaint.setPathEffect(new CornerPathEffect(10));
         mElasticWavePaint.setAntiAlias(true);
@@ -201,6 +206,7 @@ public class FundooProgressDialog extends View {
     }
 
     private void initFirstFrameEver(Canvas canvas) {
+        canvas.drawArc(mCricleRect, 270, 360, false, mCirclePlaceHolderPaint);
         Path pathArrow = new Path();
         pathArrow.moveTo(mArrowPoints.get(0).x, mArrowPoints.get(0).y);
         pathArrow.lineTo(mArrowPoints.get(1).x, mArrowPoints.get(1).y);
@@ -214,6 +220,7 @@ public class FundooProgressDialog extends View {
     }
 
     private void reduceArrowFrame(Canvas canvas) {
+        canvas.drawArc(mCricleRect, 270, 360, false, mCirclePlaceHolderPaint);
         mArrowPoints.clear();
         if (mArrowPointStartReachedTarget && mArrowPointEndReachedTarget) {
             mStopAnimationArrow = true;
@@ -246,6 +253,7 @@ public class FundooProgressDialog extends View {
     }
 
     private void drawElasticBand(Canvas canvas) {
+        canvas.drawArc(mCricleRect, 270, 360, false, mCirclePlaceHolderPaint);
         Path path = new Path();
         path.moveTo(mPathPoints.get(0).x, mPathPoints.get(0).y);
 
@@ -256,7 +264,7 @@ public class FundooProgressDialog extends View {
     }
 
     private void animateElasticBandToPosition(Canvas canvas) {
-
+        canvas.drawArc(mCricleRect, 270, 360, false, mCirclePlaceHolderPaint);
         if (!mMiddlePointElasticBand.equals(mTargetPoint.x, mTargetPoint.y)) {
             mMiddlePointElasticBand.offset(0, -5);
         } else {
@@ -272,6 +280,7 @@ public class FundooProgressDialog extends View {
     }
 
     private void bouncePointArrow(Canvas canvas) {
+        canvas.drawArc(mCricleRect, 270, 360, false, mCirclePlaceHolderPaint);
         if (!mTargetPointStartArrow.equals(mTargetPointEndArrow.x, mTargetPointEndArrow.y)) {
             mTargetPointStartArrow.offset(0, -5);
         } else {
@@ -285,6 +294,7 @@ public class FundooProgressDialog extends View {
     }
 
     private void drawCircle(Canvas canvas) {
+        canvas.drawArc(mCricleRect, 270, 360, false, mCirclePlaceHolderPaint);
         if (mSweepAngle != 360) {
             mSweepAngle = mSweepAngle + 6;
 
@@ -305,6 +315,7 @@ public class FundooProgressDialog extends View {
     }
 
     private void drawElasticBandWave(Canvas canvas) {
+       // canvas.drawArc(mCricleRect, 270, 360, false, mCirclePlaceHolderPaint);
         List<Point> pathPoints = null;
       /*  if (mCounter % 2 == 0) {
             pathPoints = mIntermediatePointList1;
